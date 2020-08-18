@@ -204,7 +204,7 @@
 
 		<!-- ko if: actions().length -->
             <hr>
-            <h2>其他操作</h2>
+            <h2>Các hoạt động khác</h2>
 			<!-- ko foreach: actions -->
 				<!-- ko if: has_permission -->
 					<input type="button" class="btn btn-w-m btn-info" data-bind="click: function(){$root.customAction(action_name, messages, confirmation)}, value: title,
