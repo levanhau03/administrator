@@ -34,7 +34,7 @@ class AdministratorServiceProvider extends ServiceProvider
             __DIR__.'/../../config/administrator.php' => config_path('administrator.php'),
         ]);
         $this->publishes([
-            __DIR__.'/../../../public' => public_path('packages/summerblue/administrator'),
+            __DIR__.'/../../../public' => public_path('packages/levanhau03/administrator'),
         ], 'public');
         //set the locale
         $this->setLocale();
@@ -122,15 +122,10 @@ class AdministratorServiceProvider extends ServiceProvider
     public function fixConfigAndRouteCacheIfNeeded()
     {
         // Hack for laravel config cache
+
         $file = config_path('administrator.php');
         if (file_exists($file)) {
-
-            if ($this->app->configurationIsCached()) {
-                $this->app['config']->set('administrator', array_merge(
-                    require $file, $this->app['config']->get('administrator', [])
-                ));
-            }
-
+            $this->mergeConfigFrom($file, 'administrator');
             if (app()->runningInConsole()) {
                 $configs = \Config::get('administrator');
                 $configs = $this->filter_recursive($configs);
